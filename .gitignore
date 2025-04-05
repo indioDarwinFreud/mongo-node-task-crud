@@ -1,0 +1,9 @@
+# Environment variables (variables de entorno)
+.env
+
+
+# Node dependencies (dependencias de node)
+node_modules
+
+# Build folder (carpeta construida)
+dist
