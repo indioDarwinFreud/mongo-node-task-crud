@@ -1,28 +1,155 @@
 <div class="card card-body p-4 rounded-0 bg-dark text-white">
 
-  <h3>Add a Task</h3>
+  <h3>Datos Personales</h3>
 
   <form action="/tasks/add" method="POST"> {{! "POST" enviar datos al servidor sin la necesidad de navegar }}
 
-    <div>
-      <label for="title"> Write a title: </label>
+    <div class="mb-3">
+      <label for="name">Escriba su nombre completo:</label>
       <input
         type="text"
-        name="title"
-        placeholder="Title"
-        id="title"
+        name="name"
+        placeholder="Name"
+        id="name"
         class="form-control rounded-0 bg-dark text-white"
+        required
       />
     </div>
 
-    <div>
-      <label for="description"> Description: </label>
-      <textarea
-        name="description"
-        placeholder="Description"
-        id="description"
+    <div class="mb-3">
+      <label for="phone">Escriba su teléfono:</label>
+      <input
+        type="number"
+        name="phone"
+        placeholder="Phone"
+        id="phone"
         class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email">Escriba su correo electrónico:</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        id="email"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <h3>Describa su perfil</h3>
+      <textarea
+        name="profile"
+        placeholder="Profile Description"
+        id="profile"
+        class="form-control rounded-0 bg-dark text-white"
+        rows="3"
+        required
       ></textarea>
+    </div>
+
+    <h3>Formación Académica</h3>
+
+    <div class="mb-3">
+      <label for="degree">Título obtenido:</label>
+      <input
+        type="text"
+        name="degree"
+        placeholder="Degree"
+        id="degree"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="institution">Institución educativa:</label>
+      <input
+        type="text"
+        name="institution"
+        placeholder="Institution"
+        id="institution"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="educationDates">Fecha de inicio y finalización:</label>
+      <input
+        type="date"
+        name="educationDates"
+        id="educationDates"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <h3>Experiencia Laboral</h3>
+
+    <div class="mb-3">
+      <label for="jobTitle">Nombre del cargo:</label>
+      <input
+        type="text"
+        name="jobTitle"
+        placeholder="Job Title"
+        id="jobTitle"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="company">Empresa/Institución:</label>
+      <input
+        type="text"
+        name="company"
+        placeholder="Company"
+        id="company"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="jobDates">Fecha (inicio y fin):</label>
+      <input
+        type="date"
+        name="jobDates"
+        id="jobDates"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="jobDescription">Breve descripción de funciones y logros:</label>
+      <textarea
+        name="jobDescription"
+        placeholder="Job Description"
+        id="jobDescription"
+        class="form-control rounded-0 bg-dark text-white"
+        rows="3"
+        required
+      ></textarea>
+    </div>
+
+    <h3>Idiomas</h3>
+
+    <div class="mb-3">
+      <label for="languages">Idiomas:</label>
+      <input
+        type="text"
+        name="languages"
+        placeholder="Languages"
+        id="languages"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+      />
     </div>
 
     <button class="btn btn-primary btn-sm mt-2">Add</button>

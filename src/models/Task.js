@@ -1,22 +1,66 @@
-// Esquema de mongo DB
+// Esquema de MongoDB adaptado a los datos del formulario
 
 import { Schema, model } from "mongoose";
 
 const taskSchema = new Schema(
   {
-    title: {
-        type: String, // Para que sea de tipo string
-        required: true, // Para que salte un error si no se completa
-        unique: true, // Es unico para que no se repita
-        trim: true, // Para eliminar los espacios de principio a fin
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    description: {
-        type: String,
-        required: true,
+    phone: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    done: {
-        type: Boolean,
-        default: false, // Para avisar si se tiene tareas pendientes
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    profile: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    degree: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    institution: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    educationDates: {
+      type: Date, // Campo de tipo fecha
+      required: true,
+    },
+    jobTitle: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    company: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    jobDates: {
+      type: Date, // Campo de tipo fecha
+      required: true,
+    },
+    jobDescription: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    languages: {
+      type: String,
+      required: true,
+      trim: true,
     },
   },
   {
@@ -25,4 +69,4 @@ const taskSchema = new Schema(
   }
 );
 
-export default model ("Task", taskSchema);
+export default model("Task", taskSchema);

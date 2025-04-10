@@ -1,29 +1,167 @@
 <div class="container">
-  <div class="raw">
-    <div class="col-md-5 offset-md-3">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
       <div class="card card-body bg-dark p-4 text-white rounded-0">
 
-        <h1>Update a Task</h1>
+        <h1>Update Task</h1>
         <form action="/tasks/{{task._id}}/edit" method="POST">
-          <div class="mb-3">
 
+          <div class="mb-3">
+            <label for="name">Name</label>
             <input
               type="text"
-              name="title"
-              placeholder="Title"
-              value="{{task.title}}"
+              name="name"
+              placeholder="Name"
+              value="{{task.name}}"
+              id="name"
               class="form-control rounded-0 bg-dark text-white"
+              required
             />
-
           </div>
 
-          <div class="md-3">
-            <textarea
-              name="description"
-              rows="3"
-              placeholder="Add a description"
+          <div class="mb-3">
+            <label for="phone">Phone</label>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone"
+              value="{{task.phone}}"
+              id="phone"
               class="form-control rounded-0 bg-dark text-white"
-            >{{task.description}}</textarea>
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value="{{task.email}}"
+              id="email"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="profile">Profile</label>
+            <textarea
+              name="profile"
+              placeholder="Profile Description"
+              id="profile"
+              rows="3"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            >{{task.profile}}</textarea>
+          </div>
+
+          <h3>Academic Information</h3>
+
+          <div class="mb-3">
+            <label for="degree">Degree</label>
+            <input
+              type="text"
+              name="degree"
+              placeholder="Degree"
+              value="{{task.degree}}"
+              id="degree"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="institution">Institution</label>
+            <input
+              type="text"
+              name="institution"
+              placeholder="Institution"
+              value="{{task.institution}}"
+              id="institution"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="educationDates">Education Dates</label>
+            <input
+              type="date"
+              name="educationDates"
+              value="{{task.educationDates}}"
+              id="educationDates"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
+          </div>
+
+          <h3>Work Experience</h3>
+
+          <div class="mb-3">
+            <label for="jobTitle">Job Title</label>
+            <input
+              type="text"
+              name="jobTitle"
+              placeholder="Job Title"
+              value="{{task.jobTitle}}"
+              id="jobTitle"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="company">Company</label>
+            <input
+              type="text"
+              name="company"
+              placeholder="Company"
+              value="{{task.company}}"
+              id="company"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="jobDates">Job Dates</label>
+            <input
+              type="date"
+              name="jobDates"
+              value="{{task.jobDates}}"
+              id="jobDates"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="jobDescription">Job Description</label>
+            <textarea
+              name="jobDescription"
+              placeholder="Job Description"
+              id="jobDescription"
+              rows="3"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            >{{task.jobDescription}}</textarea>
+          </div>
+
+          <h3>Languages</h3>
+
+          <div class="mb-3">
+            <label for="languages">Languages</label>
+            <input
+              type="text"
+              name="languages"
+              placeholder="Languages"
+              value="{{task.languages}}"
+              id="languages"
+              class="form-control rounded-0 bg-dark text-white"
+              required
+            />
           </div>
 
           <button class="btn btn-primary">Update</button>
@@ -31,5 +169,4 @@
       </div>
     </div>
   </div>
-
 </div>

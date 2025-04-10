@@ -1,25 +1,40 @@
 {{#if tasks}}
 
   <table class="table table-border table-hover table-dark">
-    <head>
+    <thead>
       <tr>
         <th>N.</th>
-        <th>Title</th>
-        <th>Description</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Profile</th>
+        <th>Degree</th>
+        <th>Institution</th>
+        <th>Education Dates</th>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Job Dates</th>
+        <th>Languages</th>
         <th>Operations</th>
       </tr>
-    </head>
+    </thead>
     <tbody>
 
       {{#each tasks}}
         <tr>
           <td>{{@index}}</td>
-          {{! @index es una variable que se puede usar para saber el indice de la lista }}
-          <td>{{title}}</td>
-          <td>{{description}}</td>
+          <td>{{name}}</td>
+          <td>{{phone}}</td>
+          <td>{{email}}</td>
+          <td>{{profile}}</td>
+          <td>{{degree}}</td>
+          <td>{{institution}}</td>
+          <td>{{educationDates}}</td>
+          <td>{{jobTitle}}</td>
+          <td>{{company}}</td>
+          <td>{{jobDates}}</td>
+          <td>{{languages}}</td>
           <td>
-            {{! Así se hace una condicional en handlebars }}
-
             {{#if done}}
               <a
                 href="/tasks/{{_id}}/toggleDone"
@@ -36,7 +51,6 @@
             <a href="/tasks/{{_id}}/edit" class="btn btn-info">Update</a>
           </td>
         </tr>
-
       {{/each}}
     </tbody>
   </table>
