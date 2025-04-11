@@ -62,6 +62,11 @@ const taskSchema = new Schema(
       required: true,
       trim: true,
     },
+    photo: {
+      type: String, // Almacena el nombre del archivo de la foto
+      required: false,
+      trim: true,
+    },
   },
   {
     timestamps: true,

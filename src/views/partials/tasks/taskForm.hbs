@@ -2,7 +2,7 @@
 
   <h3>Datos Personales</h3>
 
-  <form action="/tasks/add" method="POST"> {{! "POST" enviar datos al servidor sin la necesidad de navegar }}
+  <form action="/tasks/add" method="POST" enctype="multipart/form-data"> {{! "POST" enviar datos al servidor sin la necesidad de navegar }}
 
     <div class="mb-3">
       <label for="name">Escriba su nombre completo:</label>
@@ -39,6 +39,25 @@
         required
       />
     </div>
+
+    <div class="mb-3">
+      <label for="photo">Upload Photo</label>
+      <input
+        type="file"
+        name="photo"
+        id="photo"
+        class="form-control rounded-0 bg-dark text-white"
+      />
+    </div>
+
+    {{#if task.photo}}
+    <div class="mb-3">
+      <label for="currentPhoto">Current Photo:</label>
+      <div>
+        <img src="/uploads/{{task.photo}}" alt="Current Photo" width="150" />
+      </div>
+    </div>
+    {{/if}}
 
     <div class="mb-3">
       <h3>Describa su perfil</h3>
@@ -156,3 +175,31 @@
 
   </form>
 </div>
+
+<script>
+  const input = document.getElementById('photo');
+  const preview = document.createElement('img');
+
+  preview.style.maxWidth = '200px';
+  preview.style.display = 'none';
+  preview.style.marginTop = '10px';
+  input.parentNode.appendChild(preview);
+
+  input.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      preview.style.display = 'block';
+
+      reader.addEventListener('load', function () {
+        preview.setAttribute('src', this.result);
+      });
+
+      reader.readAsDataURL(file);
+    } else {
+      preview.style.display = 'none';
+      preview.setAttribute('src', '#');
+    }
+  });
+</script>

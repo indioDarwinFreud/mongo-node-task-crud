@@ -1,4 +1,4 @@
-import Task from "../models/Task";
+import Task from "../models/Task.js";
 
 export const renderTasks = async (req, res) => {
   const tasks = await Task.find().lean();
@@ -6,18 +6,17 @@ export const renderTasks = async (req, res) => {
 };
 
 export const createTask = async (req, res) => {
-  // Guardar datos en la base de datos
   try {
-    const task = Task(req.body);
-
+    const { file, body } = req;
+    const task = new Task({
+      ...body,
+      photo: file ? file.filename : null, // Guarda el nombre del archivo si se subió una foto
+    });
     await task.save();
-
     res.redirect("/");
   } catch (error) {
-    console.log(
-      "Te estás mandando cualquiera, acabás de escribir lo mismo que ya estaba escrito",
-      error
-    );
+    console.error("Error al crear la tarea:", error.message);
+    res.status(500).send("Error al crear la tarea");
   }
 };
 
@@ -50,15 +49,17 @@ export const deleteTask = async (req, res) => {
 };
 
 export const taskToggleDone = async (req, res) => {
-    const { id } = req.params;
-  
-    const task = await Task.findById(id);
-  
-    console.log(task);
-  
-    task.done = !task.done;
-  
-    await task.save();
-  
-    res.redirect("/");
-  }
+  const { id } = req.params;
+
+  const task = await Task.findById(id);
+
+  console.log(task);
+
+  task.done = !task.done;
+
+  await task.save();
+
+  res.redirect("/");
+};
+
+

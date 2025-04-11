@@ -7,3 +7,6 @@ node_modules
 
 # Build folder (carpeta construida)
 dist
+
+# Para que no se suba las fotos en git
+uploads

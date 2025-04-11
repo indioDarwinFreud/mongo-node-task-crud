@@ -4,7 +4,7 @@
       <div class="card card-body bg-dark p-4 text-white rounded-0">
 
         <h1>Update Task</h1>
-        <form action="/tasks/{{task._id}}/edit" method="POST">
+        <form action="/tasks/{{task._id}}/edit" method="POST" enctype="multipart/form-data">
 
           <div class="mb-3">
             <label for="name">Name</label>
@@ -161,6 +161,25 @@
               id="languages"
               class="form-control rounded-0 bg-dark text-white"
               required
+            />
+          </div>
+
+          <h3>Photo</h3>
+
+          <div class="mb-3">
+            <label for="photo">Current Photo</label>
+            <div>
+              <img src="/uploads/{{task.photo}}" alt="Current Photo" width="150" />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="photo">Upload New Photo</label>
+            <input
+              type="file"
+              name="photo"
+              id="photo"
+              class="form-control rounded-0 bg-dark text-white"
             />
           </div>
 
