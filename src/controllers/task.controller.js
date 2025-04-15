@@ -1,9 +1,18 @@
 import Task from "../models/Task.js";
+import dayjs from "dayjs";
 
 export const renderTasks = async (req, res) => {
   const tasks = await Task.find().lean();
-  res.render("index", { tasks: tasks });
+
+  const formattedTasks = tasks.map(task => ({
+    ...task,
+    educationDates: dayjs(task.educationDates).format("DD/MM/YYYY"),
+    jobDates: dayjs(task.jobDates).format("DD/MM/YYYY"),
+  }));
+
+  res.render("index", { tasks: formattedTasks });
 };
+
 
 export const createTask = async (req, res) => {
   try {

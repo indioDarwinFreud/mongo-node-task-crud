@@ -1,10 +1,15 @@
 import PDFDocument from "pdfkit";
+import dayjs from "dayjs";
 
 export function buildPDF(dataCallback, endCallback, cvData) {
     const doc = new PDFDocument();
 
     doc.on("data", dataCallback);
     doc.on("end", endCallback);
+
+     // Formateo de fechas
+     const formattedEducationDate = dayjs(cvData.educationDates).format("DD/MM/YYYY");
+     const formattedJobDate = dayjs(cvData.jobDates).format("DD/MM/YYYY");
 
     // Encabezado
     doc.fontSize(20).text("Curriculum Vitae", { align: "center" });
@@ -31,14 +36,14 @@ export function buildPDF(dataCallback, endCallback, cvData) {
     doc.fontSize(16).text("Formación Académica", { underline: true });
     doc.fontSize(12).text(`Título: ${cvData.degree}`);
     doc.text(`Institución: ${cvData.institution}`);
-    doc.text(`Fechas: ${cvData.educationDates}`);
+    doc.text(`Fechas: ${formattedEducationDate}`);
     doc.moveDown();
 
     // Experiencia laboral
     doc.fontSize(16).text("Experiencia Laboral", { underline: true });
     doc.fontSize(12).text(`Cargo: ${cvData.jobTitle}`);
     doc.text(`Empresa: ${cvData.company}`);
-    doc.text(`Fechas: ${cvData.jobDates}`);
+    doc.text(`Fechas: ${formattedJobDate}`);
     doc.text(`Descripción: ${cvData.jobDescription}`);
     doc.moveDown();
 

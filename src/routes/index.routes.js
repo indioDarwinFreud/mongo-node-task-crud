@@ -13,12 +13,12 @@ import Task from "../models/Task.js";
 
 const router = Router();
 
-router.get("/cv/pdf", async (req, res) => {
+router.get("/cv/pdf/:id", async (req, res) => {
   try {
-    const cvData = await Task.findOne().lean(); // Obtén el primer CV como ejemplo
+    const cvData = await Task.findById(req.params.id).lean(); // Obtén los datos del CV desde la base de datos
 
     if (!cvData) {
-      return res.status(404).send("No se encontró ningún CV");
+      return res.status(404).send("No se encontró el CV");
     }
 
     const stream = res.writeHead(200, {
