@@ -11,10 +11,9 @@
             <input
               type="text"
               name="name"
-              placeholder="Name"
-              value="{{task.name}}"
               id="name"
-              class="form-control rounded-0 bg-dark text-white"
+              value="{{task.name}}"
+              class="form-control"
               required
             />
           </div>
@@ -91,9 +90,7 @@
               type="date"
               name="educationDates"
               value="{{task.educationDates}}"
-              id="educationDates"
-              class="form-control rounded-0 bg-dark text-white"
-              required
+              class="form-control"
             />
           </div>
 
@@ -131,9 +128,7 @@
               type="date"
               name="jobDates"
               value="{{task.jobDates}}"
-              id="jobDates"
-              class="form-control rounded-0 bg-dark text-white"
-              required
+              class="form-control"
             />
           </div>
 
@@ -179,11 +174,11 @@
               type="file"
               name="photo"
               id="photo"
-              class="form-control rounded-0 bg-dark text-white"
+              class="form-control"
             />
           </div>
 
-          <button class="btn btn-primary">Update</button>
+          <button type="submit" class="btn btn-primary">Update</button>
         </form>
       </div>
     </div>
