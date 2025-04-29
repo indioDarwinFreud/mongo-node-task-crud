@@ -1,4 +1,4 @@
-import app from "./app";
+import app from "./app.js";
 import './database.js';
 import {PORT} from './config.js';
 
