@@ -22,14 +22,14 @@
     "mongoose": "^8.13.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.2",
-    "pdfkit": "^0.17.0"
-  },
-  "devDependencies": {
+    "pdfkit": "^0.17.0",
     "@babel/cli": "^7.26.4",
     "@babel/core": "^7.26.10",
     "@babel/node": "^7.26.0",
     "@babel/plugin-transform-runtime": "^7.26.10",
-    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-env": "^7.26.9"
+  },
+  "devDependencies": {
     "ncp": "^2.0.0",
     "nodemon": "^3.1.9"
   }
