@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js --exec babel-node",
-   "build": "npx babel src -d dist && cp -r src/views dist/views && cp -r src/public dist/public",
-    "start": "node dist/index.js"
+    "prepare": "npm install",
+    "build": "npx babel src -d dist && cp -r src/views dist/views && cp -r src/public dist/public",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.js --exec babel-node"
   },
   "keywords": [],
   "author": "Luis Esteban Lovos",
@@ -26,10 +27,8 @@
     "@babel/core": "^7.26.10",
     "@babel/node": "^7.26.0",
     "@babel/plugin-transform-runtime": "^7.26.10",
-    "@babel/preset-env": "^7.26.9"
-    
-  },
-  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "ncp": "^2.0.0",
     "nodemon": "^3.1.9"
   },
   "engines": {
