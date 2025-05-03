@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "npm install",
-    "build": "npm install && npx babel src -d dist && cp -r src/views dist/views && cp -r src/public dist/public",
+    "build": "dist/index.js",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.js --exec babel-node"
   },
