@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "npm install",
-    "build": "npx babel src --no-babelrc --presets=@babel/preset-env --out-dir dist && cp -r src/views dist/views && cp -r src/public dist/public",
+    "build": "./node_modules/.bin/babel src --presets=@babel/preset-env --out-dir dist && cp -r src/views dist/views && cp -r src/public dist/public",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.js --exec babel-node"
   },
@@ -14,11 +14,8 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
-    "@babel/cli": "^7.27.1",
-    "@babel/core": "^7.27.1",
     "@babel/node": "^7.26.0",
     "@babel/plugin-transform-runtime": "^7.26.10",
-    "@babel/preset-env": "^7.27.1",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -33,5 +30,10 @@
   },
   "engines": {
     "node": "18.x"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.27.1",
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.1"
   }
 }
