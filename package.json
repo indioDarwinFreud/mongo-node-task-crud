@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "npm install",
-    "build": "./node_modules/.bin/babel src --presets=@babel/preset-env --out-dir dist && cp -r src/views dist/views && cp -r src/public dist/public",
+    "build": "babel-node src --presets=@babel/preset-env --out-dir dist && cp -r src/views dist/views && cp -r src/public dist/public",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.js --exec babel-node"
   },
