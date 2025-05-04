@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "start":  "node dist/index.js",
+    "start":  "node src/index.js",
     "build": "echo \"Sin paso de build\"",
     
-    "dev": "nodemon dist/index.js"
+    "dev": "nodemon src/index.js"
   },
   "engines": {
     "node": "18.x"
