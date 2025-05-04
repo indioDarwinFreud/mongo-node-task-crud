@@ -1,7 +1,7 @@
 import Task from "../models/Task.js";
 import dayjs from "dayjs";
-import fs from "fs";
-import path from "path";
+import fs from "fs-extra";
+import cloudinary from "../libs/cloudinary.js";
 
 export const renderTasks = async (req, res) => {
   const tasks = await Task.find().lean();
@@ -19,14 +19,21 @@ export const createTask = async (req, res) => {
   try {
     const { file, body } = req;
 
-    // Validación de campos obligatorios
     if (!body.name || !body.email) {
       return res.status(400).send("El nombre y el correo electrónico son obligatorios.");
     }
 
+    let photoUrl = "";
+
+    if (file) {
+      const result = await cloudinary.uploader.upload(file.path);
+      photoUrl = result.secure_url;
+      await fs.remove(file.path);
+    }
+
     const task = new Task({
       ...body,
-      photo: file ? file.filename : null, // Guarda el nombre del archivo si se subió una foto
+      photo: photoUrl,
     });
 
     await task.save();
@@ -41,7 +48,6 @@ export const renderTaskEdit = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id).lean();
 
-    // Formatear fechas para que el input type="date" las entienda
     if (task.educationDates) {
       task.educationDates = dayjs(task.educationDates).format("YYYY-MM-DD");
     }
@@ -60,15 +66,14 @@ export const renderTaskEdit = async (req, res) => {
 export const editTask = async (req, res) => {
   try {
     const { id } = req.params;
+    const { file, body } = req;
 
-    console.log("Datos recibidos:", req.body);
-    console.log("Archivo subido:", req.file);
+    const updatedData = { ...body };
 
-    const updatedData = { ...req.body };
-
-    // Si se sube una nueva foto, actualiza el campo "photo"
-    if (req.file) {
-      updatedData.photo = req.file.filename;
+    if (file) {
+      const result = await cloudinary.uploader.upload(file.path);
+      updatedData.photo = result.secure_url;
+      await fs.remove(file.path);
     }
 
     await Task.findByIdAndUpdate(id, updatedData, { new: true });
@@ -82,7 +87,6 @@ export const editTask = async (req, res) => {
 
 export const deleteTask = async (req, res) => {
   const { id } = req.params;
-
   await Task.findByIdAndDelete(id);
   res.redirect("/");
 };
@@ -90,7 +94,6 @@ export const deleteTask = async (req, res) => {
 export const taskToggleDone = async (req, res) => {
   try {
     const { id } = req.params;
-
     const task = await Task.findById(id);
 
     if (!task) {
@@ -98,7 +101,6 @@ export const taskToggleDone = async (req, res) => {
     }
 
     task.done = !task.done;
-
     await task.save();
 
     res.redirect("/");
