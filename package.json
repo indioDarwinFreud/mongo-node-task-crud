@@ -1,25 +1,15 @@
 {
   "name": "createcv",
   "version": "0.0.1",
-  "description": "",
-  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "prepare": "npm install",
-    "build": "npx babel src --out-dir dist",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.js --exec babel-node"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
-  "keywords": [],
-  "author": "Luis Esteban Lovos",
-  "license": "ISC",
   "engines": {
     "node": "18.x"
   },
   "dependencies": {
-    "@babel/node": "^7.26.0",
-    "@babel/plugin-transform-runtime": "^7.26.10",
-    "@babel/runtime": "^7.27.1",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -28,13 +18,9 @@
     "mongoose": "^8.13.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.2",
-    "ncp": "^2.0.0",
-    "nodemon": "^3.1.9",
     "pdfkit": "^0.17.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.27.1",
-    "@babel/core": "^7.27.1",
-    "@babel/preset-env": "^7.27.1"
+    "nodemon": "^3.1.9"
   }
 }
