@@ -1,5 +1,5 @@
 import { Router } from "express";
-import upload from "../uploads/multer.js"; // corregido
+import {upload} from "../uploads/multer.js"; // corregido
 import {
   renderTasks,
   createTask,
