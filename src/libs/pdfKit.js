@@ -1,27 +1,30 @@
 import PDFDocument from "pdfkit";
 import dayjs from "dayjs";
+import fs from "fs"; // Para verificar si el archivo de la foto existe
 
-export function buildPDF(dataCallback, endCallback, cvData) {
+export const buildPDF = (dataCallback, endCallback, cvData) => {
     const doc = new PDFDocument();
 
     doc.on("data", dataCallback);
     doc.on("end", endCallback);
 
-     // Formateo de fechas
-     const formattedEducationDate = dayjs(cvData.educationDates).format("DD/MM/YYYY");
-     const formattedJobDate = dayjs(cvData.jobDates).format("DD/MM/YYYY");
+    // Formateo de fechas
+    const formattedEducationDate = dayjs(cvData.educationDates).format("DD/MM/YYYY");
+    const formattedJobDate = dayjs(cvData.jobDates).format("DD/MM/YYYY");
 
     // Encabezado
     doc.fontSize(20).text("Curriculum Vitae", { align: "center" });
     doc.moveDown();
 
     // Foto
-    if (cvData.photo) {
+    if (cvData.photo && fs.existsSync(`uploads/${cvData.photo}`)) {
         doc.image(`uploads/${cvData.photo}`, {
             fit: [100, 100],
             align: "center",
         });
         doc.moveDown();
+    } else if (cvData.photo) {
+        console.log("La foto no existe en la ruta especificada.");
     }
 
     // Datos personales
@@ -54,4 +57,4 @@ export function buildPDF(dataCallback, endCallback, cvData) {
 
     // Finaliza el documento
     doc.end();
-}
+};
