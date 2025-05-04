@@ -16,6 +16,7 @@
   "dependencies": {
     "@babel/node": "^7.26.0",
     "@babel/plugin-transform-runtime": "^7.26.10",
+    "@babel/runtime": "^7.27.1",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
