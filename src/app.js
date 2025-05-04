@@ -3,8 +3,12 @@ import { create } from 'express-handlebars';
 import path from 'path';
 import morgan from 'morgan';
 import indexRouter from './routes/index.routes.js';
+import { fileURLToPath } from "url";
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configurar vistas
 app.set('views', path.join(__dirname, 'views'));
