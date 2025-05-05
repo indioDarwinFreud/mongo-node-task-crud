@@ -39,7 +39,7 @@ export const createTask = async (req, res) => {
     await task.save();
     res.redirect("/");
   } catch (error) {
-    console.error("Error al crear la tarea:", error.message);
+    console.error("Error al crear la tarea:", error);
     res.status(500).send("Error al crear la tarea");
   }
 };
