@@ -1,6 +1,7 @@
 import PDFDocument from "pdfkit";
 import dayjs from "dayjs";
 import axios from "axios";
+import { v2 as cloudinary } from "cloudinary";
 
 export const buildPDF = async (dataCallback, endCallback, cvData) => {
   const doc = new PDFDocument();
@@ -19,11 +20,24 @@ export const buildPDF = async (dataCallback, endCallback, cvData) => {
   // Foto desde Cloudinary
   if (cvData.photo) {
     try {
-      const response = await axios.get(cvData.photo, { responseType: "arraybuffer" });
+      // Extraer public_id desde la URL original de Cloudinary
+      const matches = cvData.photo.match(/\/upload\/(?:v\d+\/)?(.+)\.(jpg|jpeg|png|webp|gif)$/);
+      if (!matches || !matches[1]) {
+        throw new Error("No se pudo extraer el public_id de la URL de Cloudinary.");
+      }
+
+      const publicId = matches[1]; // sin extensión
+
+      // Generar una nueva URL con formato JPG desde Cloudinary
+      const jpgUrl = cloudinary.url(publicId, {
+        format: "jpg",
+        transformation: [{ width: 100, height: 100, crop: "limit" }],
+      });
+
+      const response = await axios.get(jpgUrl, { responseType: "arraybuffer" });
       const imageBuffer = Buffer.from(response.data, "binary");
 
-      // Verifica si la imagen tiene un tipo MIME válido
-      const contentType = response.headers['content-type'];
+      const contentType = response.headers["content-type"];
       if (!contentType.startsWith("image/")) {
         throw new Error("El archivo no es una imagen válida.");
       }
@@ -34,16 +48,12 @@ export const buildPDF = async (dataCallback, endCallback, cvData) => {
       });
       doc.moveDown();
     } catch (error) {
-      // Manejo de errores detallado
       if (error.response) {
-        // Error de respuesta HTTP
         console.error(`Error HTTP al intentar obtener la imagen: ${error.response.status} - ${error.response.statusText}`);
       } else if (error.request) {
-        // No se recibió respuesta del servidor
         console.error("No se recibió respuesta del servidor al intentar obtener la imagen.");
       } else {
-        // Otros errores, como problemas con la configuración
-        console.error("Error al realizar la solicitud para la imagen:", error.message);
+        console.error("Error al procesar la imagen:", error.message);
       }
     }
   }
