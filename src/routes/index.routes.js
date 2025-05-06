@@ -16,25 +16,24 @@ const router = Router();
 
 router.get("/cv/pdf/:id", async (req, res) => {
   try {
-    const cvData = await Task.findById(req.params.id).lean();
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).send("CV no encontrado");
 
-    if (!cvData) {
-      return res.status(404).send("No se encontró el CV");
-    }
+    const cvData = task; // Le pasamos los datos del CV
 
-    const stream = res.writeHead(200, {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename=${cvData.name}_CV.pdf`,
-    });
-
+    // Creamos el flujo de respuesta para el PDF
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename=cv-${task._id}.pdf`);
+    
+    // Llamamos a buildPDF pasando el flujo de respuesta de Express
     buildPDF(
-      (chunk) => stream.write(chunk),
-      () => stream.end(),
-      cvData
+      (chunk) => res.write(chunk), // Enviamos los datos al cliente en trozos
+      () => res.end(), // Cerramos la respuesta al finalizar
+      cvData // Los datos del CV
     );
-  } catch (error) {
-    console.error("Error al generar el CV en PDF:", error.message);
-    res.status(500).send("Error al generar el CV en PDF");
+  } catch (err) {
+    console.error("Error en la ruta:", err);
+    res.status(500).send("Error interno");
   }
 });
 
