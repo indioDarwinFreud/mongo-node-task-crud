@@ -7,7 +7,7 @@
         <form action="/tasks/{{task._id}}/edit" method="POST" enctype="multipart/form-data">
 
           <div class="mb-3">
-            <label for="name">Name</label>
+            <label for="name">Nombre completo</label>
             <input
               type="text"
               name="name"
@@ -19,7 +19,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="phone">Phone</label>
+            <label for="phone">Número de teléfono</label>
             <input
               type="text"
               name="phone"
@@ -32,7 +32,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="email">Email</label>
+            <label for="email">Correo electrónico</label>
             <input
               type="email"
               name="email"
@@ -45,7 +45,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="profile">Profile</label>
+            <label for="profile">Descripción personal</label>
             <textarea
               name="profile"
               placeholder="Profile Description"
@@ -59,7 +59,7 @@
           <h3>Academic Information</h3>
 
           <div class="mb-3">
-            <label for="degree">Degree</label>
+            <label for="degree">Título</label>
             <input
               type="text"
               name="degree"
@@ -72,7 +72,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="institution">Institution</label>
+            <label for="institution">Institución</label>
             <input
               type="text"
               name="institution"
@@ -85,19 +85,29 @@
           </div>
 
           <div class="mb-3">
-            <label for="educationDates">Education Dates</label>
+            <label for="educationDatesStart">Fecha de inicio</label>
             <input
               type="date"
-              name="educationDates"
-              value="{{task.educationDates}}"
+              name="educationDatesStart"
+              value="{{task.educationDatesStart}}"
               class="form-control"
             />
           </div>
 
-          <h3>Work Experience</h3>
+          <div class="mb-3">
+            <label for="educationDatesEnd">Fecha de finalización</label>
+            <input
+              type="date"
+              name="educationDatesEnd"
+              value="{{task.educationDatesEnd}}"
+              class="form-control"
+            />
+          </div>
+
+          <h3>Experiencia Laboral</h3>
 
           <div class="mb-3">
-            <label for="jobTitle">Job Title</label>
+            <label for="jobTitle">Nombre del cargo</label>
             <input
               type="text"
               name="jobTitle"
@@ -110,7 +120,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="company">Company</label>
+            <label for="company">Empresa</label>
             <input
               type="text"
               name="company"
@@ -123,17 +133,27 @@
           </div>
 
           <div class="mb-3">
-            <label for="jobDates">Job Dates</label>
+            <label for="jobDatesStart">Fecha de inicio</label>
             <input
               type="date"
-              name="jobDates"
-              value="{{task.jobDates}}"
+              name="jobDatesStart"
+              value="{{task.jobDatesStart}}"
               class="form-control"
             />
           </div>
 
           <div class="mb-3">
-            <label for="jobDescription">Job Description</label>
+            <label for="jobDatesEnd">Fecha de finalización</label>
+            <input
+              type="date"
+              name="jobDatesEnd"
+              value="{{task.jobDatesEnd}}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="jobDescription">Breve descripción de funciones y logros</label>
             <textarea
               name="jobDescription"
               placeholder="Job Description"
@@ -144,10 +164,10 @@
             >{{task.jobDescription}}</textarea>
           </div>
 
-          <h3>Languages</h3>
+          <h3>Idiomas</h3>
 
           <div class="mb-3">
-            <label for="languages">Languages</label>
+            <label for="languages">Idiomas</label>
             <input
               type="text"
               name="languages"

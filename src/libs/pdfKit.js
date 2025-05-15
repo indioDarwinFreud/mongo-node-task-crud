@@ -10,8 +10,10 @@ export const buildPDF = async (dataCallback, endCallback, cvData) => {
   doc.on("end", endCallback);
 
   // Formateo de fechas
-  const formattedEducationDate = dayjs(cvData.educationDates).format("DD/MM/YYYY");
-  const formattedJobDate = dayjs(cvData.jobDates).format("DD/MM/YYYY");
+  const formattedEducationDateStart = dayjs(cvData.educationDatesStart).format("DD/MM/YYYY");
+  const formattedEducationDateEnd = dayjs(cvData.educationDatesEnd).format("DD/MM/YYYY");
+  const formattedJobDateStart = dayjs(cvData.jobDatesStart).format("DD/MM/YYYY");
+  const formattedJobDateEnd = dayjs(cvData.jobDatesEnd).format("DD/MM/YYYY");
 
   // Encabezado
   doc.fontSize(20).text("Curriculum Vitae", { align: "center" });
@@ -31,7 +33,7 @@ export const buildPDF = async (dataCallback, endCallback, cvData) => {
       // Generar una nueva URL con formato JPG desde Cloudinary
       const jpgUrl = cloudinary.url(publicId, {
         format: "jpg",
-        transformation: [{ width: 100, height: 100, crop: "limit" }],
+        transformation: [{ width: 120, height: 120, crop: "limit" }],
       });
 
       const response = await axios.get(jpgUrl, { responseType: "arraybuffer" });
@@ -70,14 +72,16 @@ export const buildPDF = async (dataCallback, endCallback, cvData) => {
   doc.fontSize(16).text("Formación Académica", { underline: true });
   doc.fontSize(12).text(`Título: ${cvData.degree}`);
   doc.text(`Institución: ${cvData.institution}`);
-  doc.text(`Fechas: ${formattedEducationDate}`);
+  doc.text(`Fechas de inicio: ${formattedEducationDateStart}`);
+  doc.text(`Fechas de finalización: ${formattedEducationDateEnd}`);
   doc.moveDown();
 
   // Experiencia laboral
   doc.fontSize(16).text("Experiencia Laboral", { underline: true });
   doc.fontSize(12).text(`Cargo: ${cvData.jobTitle}`);
   doc.text(`Empresa: ${cvData.company}`);
-  doc.text(`Fechas: ${formattedJobDate}`);
+  doc.text(`Fecha de inicio: ${formattedJobDateStart}`);
+  doc.text(`Fecha de finalización: ${formattedJobDateEnd}`);
   doc.text(`Descripción: ${cvData.jobDescription}`);
   doc.moveDown();
 

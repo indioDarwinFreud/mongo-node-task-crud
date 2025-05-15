@@ -1,12 +1,11 @@
 {{#if tasks}}
-
   <div class="table-responsive">
     <table class="table table-border table-hover table-dark">
       <thead>
         <tr>
-          <th>N.</th>
-          <th>Details</th>
-          <th>Operations</th>
+          <th>N.º</th>
+          <th>Detalles</th>
+          <th>Operaciones</th>
         </tr>
       </thead>
       <tbody>
@@ -15,51 +14,44 @@
             <td>{{inc @index}}</td>
             <td>
               <ul class="list-unstyled mb-2">
-                <li><strong>Photo:</strong><br />
-                  <img
-                    src="{{photo}}"
-                    alt="Photo"
-                    class="img-thumbnail mt-2"
-                    width="100"
-                  />
-                </li>
-                <li><strong>Name:</strong> {{name}}</li>
-                <li><strong>Phone:</strong> {{phone}}</li>
-                <li><strong>Email:</strong> {{email}}</li>
-                <li><strong>Profile:</strong> {{profile}}</li>
-                <li><strong>Degree:</strong> {{degree}}</li>
-                <li><strong>Institution:</strong> {{institution}}</li>
-                <li><strong>Education Dates:</strong> {{educationDates}}</li>
-                <li><strong>Job Title:</strong> {{jobTitle}}</li>
-                <li><strong>Company:</strong> {{company}}</li>
-                <li><strong>Job Dates:</strong> {{jobDates}}</li>
-                <li><strong>Languages:</strong> {{languages}}</li>
-                
+                {{#if photo}}
+                  <li><strong>Foto:</strong><br />
+                    <img src="{{photo}}" alt="Photo" class="img-thumbnail mt-2" width="100" />
+                  </li>
+                {{/if}}
+                <li><strong>Nombre completo:</strong> {{name}}</li>
+                <li><strong>Número de teléfono:</strong> {{phone}}</li>
+                <li><strong>Correo electrónico:</strong> {{email}}</li>
+                <li><strong>Descripción personal:</strong> {{profile}}</li>
+                <li><strong>Título:</strong> {{degree}}</li>
+                <li><strong>Institución:</strong> {{institution}}</li>
+                <li><strong>Fecha de inicio:</strong> {{educationDatesStart}}</li>
+                <li><strong>Fecha de finalización:</strong> {{educationDatesEnd}}</li>
+                <li><strong>Nombre del cargo:</strong> {{jobTitle}}</li>
+                <li><strong>Empresa:</strong> {{company}}</li>
+                <li><strong>Fecha de inicio:</strong> {{jobDatesStart}}</li>
+                <li><strong>Fecha de finalización:</strong> {{jobDatesEnd}}</li>
+                <li><strong>Breve descripción de funciones y logros:</strong> {{jobDescription}}</li>
+                <li><strong>Idiomas:</strong> {{languages}}</li>
               </ul>
             </td>
             <td class="d-flex flex-column gap-2">
-
               {{#if done}}
                 <a href="/tasks/{{_id}}/toggleDone" class="btn btn-dark btn-sm">
-                  <i class="bi bi-x-circle"></i>
-                  Undone
+                  <i class="bi bi-x-circle"></i> Marcar como pendiente
                 </a>
               {{else}}
-               <a href="/cv/pdf/{{_id}}" class="btn btn-success btn-sm">
-
-                  <i class="bi bi-check-circle"></i>
-                  Descargar CV
+                <a href="/cv/pdf/{{_id}}" class="btn btn-success btn-sm">
+                  <i class="bi bi-check-circle"></i> Descargar CV
                 </a>
               {{/if}}
 
               <a href="/tasks/{{_id}}/delete" class="btn btn-danger btn-sm">
-                <i class="bi bi-trash"></i>
-                Delete
+                <i class="bi bi-trash"></i> Eliminar
               </a>
 
               <a href="/tasks/{{_id}}/edit" class="btn btn-info btn-sm">
-                <i class="bi bi-pencil-square"></i>
-                Update
+                <i class="bi bi-pencil-square"></i> Editar
               </a>
             </td>
           </tr>
@@ -67,14 +59,11 @@
       </tbody>
     </table>
   </div>
-
 {{else}}
-
   <div class="h-100 d-flex align-items-center justify-content-center">
     <div class="text-center text-white">
-      <h1>No Tasks</h1>
-      <img src="/icons/empty.svg" class="w-75" />
+      <h1>No hay tareas registradas</h1>
+      <img src="/icons/empty.svg" class="w-75" alt="Sin tareas" />
     </div>
   </div>
-
 {{/if}}

@@ -5,13 +5,30 @@ import cloudinary from "../libs/cloudinary.js";
 
 // Mostrar todas las tareas
 export const renderTasks = async (req, res) => {
-  const tasks = await Task.find().lean();
-  const formattedTasks = tasks.map((task) => ({
-    ...task,
-    educationDates: dayjs(task.educationDates).format("DD/MM/YYYY"),
-    jobDates: dayjs(task.jobDates).format("DD/MM/YYYY"),
-  }));
-  res.render("index", { tasks: formattedTasks });
+  try {
+    const tasks = await Task.find().lean();
+
+    const formattedTasks = tasks.map((task) => ({
+      ...task,
+      educationDatesStart: task.educationDatesStart
+        ? dayjs(task.educationDatesStart).format("DD/MM/YYYY")
+        : "",
+      educationDatesEnd: task.educationDatesEnd
+        ? dayjs(task.educationDatesEnd).format("DD/MM/YYYY")
+        : "",
+      jobDatesStart: task.jobDatesStart
+        ? dayjs(task.jobDatesStart).format("DD/MM/YYYY")
+        : "",
+      jobDatesEnd: task.jobDatesEnd
+        ? dayjs(task.jobDatesEnd).format("DD/MM/YYYY")
+        : "",
+    }));
+
+    res.render("index", { tasks: formattedTasks });
+  } catch (error) {
+    console.error("Error al renderizar tareas:", error.message);
+    res.status(500).send("Error al renderizar las tareas");
+  }
 };
 
 // Crear nueva tarea
@@ -34,6 +51,10 @@ export const createTask = async (req, res) => {
     const task = new Task({
       ...body,
       photo: photoUrl,
+      educationDatesStart: new Date(body.educationDatesStart),
+      educationDatesEnd: new Date(body.educationDatesEnd),
+      jobDatesStart: new Date(body.jobDatesStart),
+      jobDatesEnd: new Date(body.jobDatesEnd),
     });
 
     await task.save();
@@ -48,11 +69,17 @@ export const createTask = async (req, res) => {
 export const renderTaskEdit = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id).lean();
-    if (task.educationDates) {
-      task.educationDates = dayjs(task.educationDates).format("YYYY-MM-DD");
+    if (task.educationDatesStart) {
+      task.educationDatesStart = dayjs(task.educationDatesStart).format("YYYY-MM-DD");
     }
-    if (task.jobDates) {
-      task.jobDates = dayjs(task.jobDates).format("YYYY-MM-DD");
+    if (task.educationDatesEnd) {
+      task.educationDatesEnd = dayjs(task.educationDatesEnd).format("YYYY-MM-DD");
+    }
+    if (task.jobDatesStart) {
+      task.jobDatesStart = dayjs(task.jobDatesStart).format("YYYY-MM-DD");
+    }
+    if (task.jobDatesEnd) {
+      task.jobDatesEnd = dayjs(task.jobDatesEnd).format("YYYY-MM-DD");
     }
     res.render("edit", { task });
   } catch (error) {
@@ -66,7 +93,14 @@ export const editTask = async (req, res) => {
   try {
     const { id } = req.params;
     const { file, body } = req;
-    const updatedData = { ...body };
+
+    const updatedData = {
+      ...body,
+      educationDatesStart: new Date(body.educationDatesStart),
+      educationDatesEnd: new Date(body.educationDatesEnd),
+      jobDatesStart: new Date(body.jobDatesStart),
+      jobDatesEnd: new Date(body.jobDatesEnd),
+    };
 
     if (file) {
       const result = await cloudinary.uploader.upload(file.path);

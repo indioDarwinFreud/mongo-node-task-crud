@@ -1,11 +1,9 @@
 <div class="card card-body p-4 rounded-0 bg-dark text-white">
-
   <h3>Datos Personales</h3>
 
-  <form action="/tasks/add" method="POST" enctype="multipart/form-data"> {{! "POST" enviar datos al servidor sin la necesidad de navegar }}
-
+  <form action="/tasks/add" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
-      <label for="name">Escriba su nombre completo:</label>
+      <label for="name">Nombre completo:</label>
       <input
         type="text"
         name="name"
@@ -13,11 +11,12 @@
         id="name"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.name}}"
       />
     </div>
 
     <div class="mb-3">
-      <label for="phone">Escriba su teléfono:</label>
+      <label for="phone">Número de teléfono:</label>
       <input
         type="number"
         name="phone"
@@ -25,11 +24,12 @@
         id="phone"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.phone}}"
       />
     </div>
 
     <div class="mb-3">
-      <label for="email">Escriba su correo electrónico:</label>
+      <label for="email">Correo electrónico:</label>
       <input
         type="email"
         name="email"
@@ -37,11 +37,12 @@
         id="email"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.email}}"
       />
     </div>
 
     <div class="mb-3">
-      <label for="photo">Upload Photo</label>
+      <label for="photo">Foto</label>
       <input
         type="file"
         name="photo"
@@ -51,24 +52,21 @@
     </div>
 
     {{#if task.photo}}
-    <div class="mb-3">
-      <label for="currentPhoto">Current Photo:</label>
-      <div>
-        <img src="{{task.photo}}" alt="Current Photo" width="150" />
+      <div class="mb-3">
+        <label>Foto actual:</label><br />
+        <img src="{{task.photo}}" alt="Current Photo" width="150" class="img-thumbnail" />
       </div>
-    </div>
     {{/if}}
 
     <div class="mb-3">
-      <h3>Describa su perfil</h3>
+      <label for="profile">Descripción personal</label>
       <textarea
         name="profile"
-        placeholder="Profile Description"
         id="profile"
         class="form-control rounded-0 bg-dark text-white"
         rows="3"
         required
-      ></textarea>
+      >{{task.profile}}</textarea>
     </div>
 
     <h3>Formación Académica</h3>
@@ -78,10 +76,11 @@
       <input
         type="text"
         name="degree"
-        placeholder="Degree"
         id="degree"
+        placeholder="Degree"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.degree}}"
       />
     </div>
 
@@ -90,21 +89,35 @@
       <input
         type="text"
         name="institution"
-        placeholder="Institution"
         id="institution"
+        placeholder="Institution"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.institution}}"
       />
     </div>
 
     <div class="mb-3">
-      <label for="educationDates">Fecha de inicio y finalización:</label>
+      <label for="educationDatesStart">Fecha de inicio:</label>
       <input
         type="date"
-        name="educationDates"
-        id="educationDates"
+        name="educationDatesStart"
+        id="educationDatesStart"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.educationDatesStart}}"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="educationDatesEnd">Fecha de finalización:</label>
+      <input
+        type="date"
+        name="educationDatesEnd"
+        id="educationDatesEnd"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+        value="{{task.educationDatesEnd}}"
       />
     </div>
 
@@ -115,33 +128,48 @@
       <input
         type="text"
         name="jobTitle"
-        placeholder="Job Title"
         id="jobTitle"
+        placeholder="Job Title"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.jobTitle}}"
       />
     </div>
 
     <div class="mb-3">
-      <label for="company">Empresa/Institución:</label>
+      <label for="company">Empresa:</label>
       <input
         type="text"
         name="company"
-        placeholder="Company"
         id="company"
+        placeholder="Company"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.company}}"
       />
     </div>
 
     <div class="mb-3">
-      <label for="jobDates">Fecha (inicio y fin):</label>
+      <label for="jobDatesStart">Fecha de inicio:</label>
       <input
         type="date"
-        name="jobDates"
-        id="jobDates"
+        name="jobDatesStart"
+        id="jobDatesStart"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.jobDatesStart}}"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="jobDatesEnd">Fecha de finalización:</label>
+      <input
+        type="date"
+        name="jobDatesEnd"
+        id="jobDatesEnd"
+        class="form-control rounded-0 bg-dark text-white"
+        required
+        value="{{task.jobDatesEnd}}"
       />
     </div>
 
@@ -149,12 +177,12 @@
       <label for="jobDescription">Breve descripción de funciones y logros:</label>
       <textarea
         name="jobDescription"
-        placeholder="Job Description"
         id="jobDescription"
+        placeholder="Job Description"
         class="form-control rounded-0 bg-dark text-white"
         rows="3"
         required
-      ></textarea>
+      >{{task.jobDescription}}</textarea>
     </div>
 
     <h3>Idiomas</h3>
@@ -164,15 +192,15 @@
       <input
         type="text"
         name="languages"
-        placeholder="Languages"
         id="languages"
+        placeholder="Languages"
         class="form-control rounded-0 bg-dark text-white"
         required
+        value="{{task.languages}}"
       />
     </div>
 
-    <button class="btn btn-primary btn-sm mt-2">Add</button>
-
+    <button class="btn btn-primary btn-sm mt-2">Guardar</button>
   </form>
 </div>
 
@@ -189,7 +217,6 @@
     const file = this.files[0];
     if (file) {
       const reader = new FileReader();
-
       preview.style.display = 'block';
 
       reader.addEventListener('load', function () {

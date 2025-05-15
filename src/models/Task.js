@@ -34,7 +34,11 @@ const taskSchema = new Schema(
       required: true,
       trim: true,
     },
-    educationDates: {
+    educationDatesStart: {
+      type: Date, // Campo de tipo fecha
+      required: true,
+    },
+    educationDatesEnd: {
       type: Date, // Campo de tipo fecha
       required: true,
     },
@@ -48,7 +52,11 @@ const taskSchema = new Schema(
       required: true,
       trim: true,
     },
-    jobDates: {
+    jobDatesStart: {
+      type: Date, // Campo de tipo fecha
+      required: true,
+    },
+    jobDatesEnd: {
       type: Date, // Campo de tipo fecha
       required: true,
     },
