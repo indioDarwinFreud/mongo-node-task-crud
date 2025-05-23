@@ -14,6 +14,11 @@ const taskSchema = new Schema(
       required: true,
       trim: true,
     },
+    age: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
     email: {
       type: String,
       required: true,

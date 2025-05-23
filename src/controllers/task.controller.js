@@ -37,8 +37,8 @@ export const createTask = async (req, res) => {
     const { file, body } = req;
 
     // Validación básica
-    if (!body.name || !body.email || !body.phone || !body.profile) {
-      return res.status(400).send("Nombre, correo, teléfono y perfil son obligatorios.");
+    if (!body.name || !body.age || !body.email || !body.phone || !body.profile) {
+      return res.status(400).send("Nombre, edad, correo, teléfono y perfil son obligatorios.");
     }
 
     let photoUrl = "";

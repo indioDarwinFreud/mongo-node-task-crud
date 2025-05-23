@@ -64,6 +64,7 @@ export const buildPDF = async (dataCallback, endCallback, cvData) => {
   doc.fontSize(16).text("Datos Personales", { underline: true });
   doc.fontSize(12).text(`Nombre: ${cvData.name}`);
   doc.text(`Teléfono: ${cvData.phone}`);
+   doc.text(`Edad: ${cvData.age}`);
   doc.text(`Correo Electrónico: ${cvData.email}`);
   doc.text(`Perfil: ${cvData.profile}`);
   doc.moveDown();
