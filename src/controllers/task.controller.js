@@ -36,6 +36,9 @@ export const createTask = async (req, res) => {
   try {
     const { file, body } = req;
 
+    console.log("BODY recibido:", body);
+    console.log("FILE recibido:", file);
+
     // Validación básica
     if (!body.name || !body.age || !body.email || !body.phone || !body.profile) {
       return res.status(400).send("Nombre, edad, correo, teléfono y perfil son obligatorios.");
@@ -43,9 +46,13 @@ export const createTask = async (req, res) => {
 
     let photoUrl = "";
     if (file) {
+      console.log("Subiendo imagen a Cloudinary...");
       const result = await cloudinary.uploader.upload(file.path);
+      console.log("Resultado de Cloudinary:", result);
       photoUrl = result.secure_url;
       await fs.remove(file.path);
+    } else {
+      console.log("No se recibió archivo");
     }
 
     const task = new Task({
