@@ -1,15 +1,15 @@
-// src/uploads/multer.js
 import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Carpeta fuera de src
+    // La carpeta 'uploads' está en el mismo directorio que este archivo
+    cb(null, "./uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); // Nombre único para cada archivo
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
 const upload = multer({ storage });
 
-export default upload; // Exportación predeterminada
+export default upload;
