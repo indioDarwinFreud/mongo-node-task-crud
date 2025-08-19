@@ -4,8 +4,14 @@ import path from "path";
 import morgan from "morgan";
 import indexRouter from "./routes/index.routes.js";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 const app = express();
+
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
 
 // Rutas de archivo
 const __filename = fileURLToPath(import.meta.url);
