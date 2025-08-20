@@ -2,12 +2,12 @@ import Task from "../models/Task.js";
 import dayjs from "dayjs";
 import fs from "fs-extra";
 import cloudinary from "../libs/cloudinary.js";
+import path from "path"; // Agrega esta importación
 
 // Mostrar todas las tareas
 export const renderTasks = async (req, res) => {
   try {
     const tasks = await Task.find().lean();
-
     const formattedTasks = tasks.map((task) => ({
       ...task,
       educationDatesStart: task.educationDatesStart
@@ -23,7 +23,6 @@ export const renderTasks = async (req, res) => {
         ? dayjs(task.jobDatesEnd).format("DD/MM/YYYY")
         : "",
     }));
-
     res.render("index", { tasks: formattedTasks });
   } catch (error) {
     console.error("Error al renderizar tareas:", error.message);
@@ -35,7 +34,6 @@ export const renderTasks = async (req, res) => {
 export const createTask = async (req, res) => {
   try {
     const { file, body } = req;
-
     console.log("BODY recibido:", body);
     console.log("FILE recibido:", file);
 
@@ -50,6 +48,7 @@ export const createTask = async (req, res) => {
       const result = await cloudinary.uploader.upload(file.path);
       console.log("Resultado de Cloudinary:", result);
       photoUrl = result.secure_url;
+      // **** CAMBIO CLAVE AQUÍ ****
       await fs.remove(file.path);
     } else {
       console.log("No se recibió archivo");
@@ -112,6 +111,7 @@ export const editTask = async (req, res) => {
     if (file) {
       const result = await cloudinary.uploader.upload(file.path);
       updatedData.photo = result.secure_url;
+      // **** CAMBIO CLAVE AQUÍ ****
       await fs.remove(file.path);
     }
 
