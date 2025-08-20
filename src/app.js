@@ -8,26 +8,27 @@ import fs from "fs";
 
 const app = express();
 
-const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
-}
-
-// Rutas de archivo
+// Rutas de archivo: ¡Define __filename y __dirname primero!
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Crea la carpeta 'uploads' si no existe
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+}
 
 // Configurar vistas
 app.set("views", path.join(__dirname, "views"));
 const hbs = create({
-  layoutsDir: path.join(app.get("views"), "layouts"),
-  defaultLayout: "main",
-  extname: ".hbs",
-  helpers: {
-    inc: function (value) {
-      return parseInt(value) + 1;
+    layoutsDir: path.join(app.get("views"), "layouts"),
+    defaultLayout: "main",
+    extname: ".hbs",
+    helpers: {
+        inc: function (value) {
+            return parseInt(value) + 1;
+        }
     }
-  }
 });
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
@@ -41,6 +42,8 @@ app.use(indexRouter);
 
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+// Asegúrate de que esta ruta '/uploads' apunte a la misma carpeta 'uploads'
+// que está en la raíz del proyecto si 'public' también está en la raíz de 'src'
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); 
 
 export default app;
